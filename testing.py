@@ -1,40 +1,54 @@
-#Find the missing letter
+#Create a function that takes a Roman numeral as its argument and returns its value as a numeric decimal integer.
+# You don't need to validate the form of the Roman numeral.
 
-#Write a method that takes an array of consecutive (increasing) letters as input and that returns the missing letter in the array.
-
-#You will always get a valid array. And it will be always exactly one letter be missing. The length of the array will always be at least 2.
-#The array will always contain letters in only one case.
-
+#Modern Roman numerals are written by expressing each decimal digit of the number to be encoded separately,
+# starting with the leftmost digit and skipping any 0s.
+# So 1990 is rendered "MCMXC" (1000 = M, 900 = CM, 90 = XC) and 2008 is rendered "MMVIII" (2000 = MM, 8 = VIII).
+# The Roman numeral for 1666, "MDCLXVI", uses each letter in descending order.
 #Example:
 
-#['a','b','c','d','f'] -> 'e'
-#['O','Q','R','S'] -> 'P'
+#"MM"      -> 2000
+#"MDCLXVI" -> 1666
+#"M"       -> 1000
+#"CD"      ->  400
+#"XC"      ->   90
+#"XL"      ->   40
+#"I"       ->    1
 
-#(Use the English alphabet with 26 letters!)
-import string
-
-def find_missing_letter(letters_arr):
-    counter = 0
-    missing = ""
-    alphabet = list(string.ascii_letters)
-
-    #slicing attempt
-    str_alphabet = "".join(alphabet)
-    str_letters_arr = "".join(letters_arr)
-
-    alph_sliced = str_alphabet[alphabet.index(str_letters_arr[0]):alphabet.index(str_letters_arr[-1]) + 1]
-    alph_sliced_list = list(alph_sliced)
-
-    for letter in alph_sliced_list:
-        if letters_arr[counter] == letter:
-            counter+=1
-            continue
-        else:
-            missing += letter
-    print(missing)
+#Help:
+#Symbol    Value
+#I          1
+#V          5
+#X          10
+#L          50
+#C          100
+#D          500
+#M          1,000
 
 
-find_missing_letter(['O','Q','R','S'])
+# ACTUALLY DIFFICULT :'(
+# so if we say "DC" it will == 600 because D > C, but "CD" will == 400 because C < D (WEIRD AF)
+# step-by-step and it will be solved.. hopefully
+
+def sol(roman_numeral):
+    roman_dict = {"I":1,
+                  "V":5,
+                  "X":10,
+                  "L":50,
+                  "C":100,
+                  "D":500,
+                  "M":1000}
+
+    # Accessing a numeral's value form the dict
+    #if roman_numeral in roman_dict:
+    #    print(roman_dict[roman_numeral])
+
+    #if roman_numeral[0] == roman_numeral[1]:
+    #    print(roman_dict[roman_numeral[0]]*2)
+
+    #okay the plan for tmr is as such, we'll do a loop from the maximum value to the least
+    # (or opposite but it's gonna be a pain in the ass) and then check if one is larger than the other (D and C situation)
+    # so basiaclly no need for a billion if statemnts if you know what you're doing
 
 
-
+sol("MM")
