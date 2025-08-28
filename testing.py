@@ -14,21 +14,24 @@
 import string
 
 def find_missing_letter(letters_arr):
+    counter = 0
     missing = ""
     alphabet = list(string.ascii_letters)
 
-    #slicing attempt SUCCESS ( NEED TO FIND THE MISSING LETTER NOW )
+    #slicing attempt
     str_alphabet = "".join(alphabet)
     str_letters_arr = "".join(letters_arr)
 
     alph_sliced = str_alphabet[alphabet.index(str_letters_arr[0]):alphabet.index(str_letters_arr[-1]) + 1]
-    print(alph_sliced)
+    alph_sliced_list = list(alph_sliced)
 
-
-    #for i,char in enumerate(alphabet):
-    #    if alphabet[i] in letters_arr:
-    #      continue
-    #  if alphabet[i] != letters_arr[i]:
+    for letter in alph_sliced_list:
+        if letters_arr[counter] == letter:
+            counter+=1
+            continue
+        else:
+            missing += letter
+    print(missing)
 
 
 find_missing_letter(['O','Q','R','S'])
