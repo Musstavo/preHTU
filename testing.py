@@ -1,2 +1,2 @@
 #test
-print("test")
+print("tet")
