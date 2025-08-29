@@ -31,6 +31,7 @@
 # step-by-step and it will be solved.. hopefully
 
 def sol(roman_numeral):
+    result = 0
     roman_dict = {"I":1,
                   "V":5,
                   "X":10,
@@ -39,16 +40,34 @@ def sol(roman_numeral):
                   "D":500,
                   "M":1000}
 
-    # Accessing a numeral's value form the dict
-    #if roman_numeral in roman_dict:
-    #    print(roman_dict[roman_numeral])
+ # FAILED TRY due to hard coding ( LOOPING THROUGH THE DICT ) NO POINT IT SEEMS.
+ #   for i,k in enumerate(roman_dict):
+ #       if i < len(roman_numeral)-1:
 
-    #if roman_numeral[0] == roman_numeral[1]:
-    #    print(roman_dict[roman_numeral[0]]*2)
+ #           if roman_dict[roman_numeral[i+1]] < roman_dict[roman_numeral[i]]:
+ #              result += roman_dict[roman_numeral[i+1]] + roman_dict[roman_numeral[i]]
+ #           if roman_dict[roman_numeral[i+1]] > roman_dict[roman_numeral[i]]:
+ #              result += roman_dict[roman_numeral[i+1]] - roman_dict[roman_numeral[i]]
+
+ #   if len(roman_numeral) == 1:
+ #        result += roman_dict[roman_numeral]
+ #   print(result)
+
+
+
+# second try, ITERATE THE ROMAN_NUMERAL NOT THE DICT (so far so good, now the exceptions --> X L C D
+    for i,letter in enumerate(roman_numeral):
+        key = roman_numeral[i]
+        result+=roman_dict[key]
+        if roman_dict[key]<:
+
+    print(result)
+
+
+
 
     #okay the plan for tmr is as such, we'll do a loop from the maximum value to the least
     # (or opposite but it's gonna be a pain in the ass) and then check if one is larger than the other (D and C situation)
-    # so basiaclly no need for a billion if statemnts if you know what you're doing
-
+    # so basically no need for a billion if statements if you know what you're doing
 
 sol("MM")
