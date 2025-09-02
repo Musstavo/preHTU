@@ -1,59 +1,41 @@
-#You live in the city of Cartesia where all roads are laid out in a perfect grid.
-# You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk.
-# The city provides its citizens with a Walk Generating App on their phones
+#Well met with Fibonacci bigger brother, AKA Tribonacci.
+#As the name may already reveal, it works basically like a Fibonacci,
+# but summing the last 3 (instead of 2) numbers of the sequence to generate the next.
+# And, worse part of it, regrettably I won't get to hear non-native Italian speakers trying to pronounce it :(
+#So, if we are to start our Tribonacci sequence with [1, 1, 1] as a starting input (AKA signature),
 
-# -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']).
-# You always walk only a single block for each letter (direction) and you know it takes you one minute to traverse one city block,
+# we have this sequence:
+#[1, 1 ,1, 3, 5, 9, 17, 31, ...]
 
-# so create a function that will return true if the walk the app gives you will take you exactly ten minutes (you don't want to be early or late!)
-# and will, of course, return you to your starting point. Return false otherwise.
+#But what if we started with [0, 0, 1] as a signature?
+# As starting with [0, 1] instead of [1, 1] basically shifts the common Fibonacci sequence by once place,
+# you may be tempted to think that we would get the same sequence shifted by 2 places,
 
-#Note: you will always receive a valid array containing a random assortment of direction letters ('n', 's', 'e', or 'w' only).
-# It will never give you an empty array (that's not a walk, that's standing still!).
+# but that is not the case and we would get:
+#[0, 0, 1, 1, 2, 4, 7, 13, 24, ...]
 
+#Well, you may have guessed it by now, but to be clear:
+# you need to create a fibonacci function that given a signature array/list,
+# returns the first n elements - signature included of the so seeded sequence.
+#Signature will always contain 3 numbers; n will always be a non-negative number;
+# if n == 0, then return an empty array (except in C return NULL) and be ready for anything else which is not clearly specified ;)
 
-# A BIT DIFFICULT ( very in fact.. the returning to the og position is a pain )
+# DIFFICULT PROBLEM TO DIGEST
 
-# BRAIN STORMING
-# wtf ???? the len(array) must be == 10 and returning to my og location just like below
-# if it's ['s','s','n','n','n','s','s','s,'n','n'] i think it should return True
-# OKAY WAIT, if we compare 's' and 'n' alone, and 'w' and 'e' alone.. basically creating a counter
-# that if walk[0] == 'n' and walk[1] == 's' then we add one to the counter, but if we encounter another 'n' we subtract one
-# same thing with 'e' and 'w' i believe..
-
-#first issue: the first index... hard code it?! surely not.
-
-
-#ATTEMPT ONE
-def is_valid_walking(walk):
-    counter = 0
-    for i,direction in enumerate(walk):
-        if len(walk[direction]) == 10:
-            if walk[i] != walk[i+1]:
-                counter += 1
+#brain storming
+# okay.. so we sum the last three numbers to get the fourth... but increasingly in index.
+# n is the number of elements in the result array, basically the length of the array
 
 
-        else:
-            print(False)
+def tribonacci(signature, n):
+    result = []
+    fourth = sum(signature[:4])
 
-is_valid_walking(['s','s','n','n','n','s','s','s','n','n'])
-
-
-
-
-
-
-
+    for num in range(n):
+        signature.append(fourth)
+        result.append(signature[num] + fourth)
+        fourth += signature[num]
+    print(result)
 
 
-
-
-
-
-
-
-
-
-
-
-
+tribonacci([1, 1, 1], 10)
