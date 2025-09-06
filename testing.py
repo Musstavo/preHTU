@@ -1,41 +1,25 @@
-#Well met with Fibonacci bigger brother, AKA Tribonacci.
-#As the name may already reveal, it works basically like a Fibonacci,
-# but summing the last 3 (instead of 2) numbers of the sequence to generate the next.
-# And, worse part of it, regrettably I won't get to hear non-native Italian speakers trying to pronounce it :(
-#So, if we are to start our Tribonacci sequence with [1, 1, 1] as a starting input (AKA signature),
+#Given a string of words, you need to find the highest scoring word.
 
-# we have this sequence:
-#[1, 1 ,1, 3, 5, 9, 17, 31, ...]
+#Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
 
-#But what if we started with [0, 0, 1] as a signature?
-# As starting with [0, 1] instead of [1, 1] basically shifts the common Fibonacci sequence by once place,
-# you may be tempted to think that we would get the same sequence shifted by 2 places,
+#For example, the score of abad is 8 (1 + 2 + 1 + 4).
 
-# but that is not the case and we would get:
-#[0, 0, 1, 1, 2, 4, 7, 13, 24, ...]
+#You need to return the highest scoring word as a string.
 
-#Well, you may have guessed it by now, but to be clear:
-# you need to create a fibonacci function that given a signature array/list,
-# returns the first n elements - signature included of the so seeded sequence.
-#Signature will always contain 3 numbers; n will always be a non-negative number;
-# if n == 0, then return an empty array (except in C return NULL) and be ready for anything else which is not clearly specified ;)
+#If two words score the same, return the word that appears earliest in the original string.
 
-# DIFFICULT PROBLEM TO DIGEST
+#All letters will be lowercase and all inputs will be valid.
 
-#brain storming
-# okay.. so we sum the last three numbers to get the fourth... but increasingly in index.
-# n is the number of elements in the result array, basically the length of the array
+def high(x):
+    scores = []
+    alphabet = {'a':1, 'b':2, 'c':3, 'd':4, 'e':5, 'f':6, 'g':7, 'h':8, 'i':9, 'j':10, 'k':11, 'l':12, 'm': 13,
+                'n':14,'o':15,'p':16,'q':17,'r':18,'s':19,'t':20,'u':21,'v':22, 'w':23, 'x':24, 'y':25, 'z':26}
+
+    x_list = x.split()
 
 
-def tribonacci(signature, n):
-    result = []
-    fourth = sum(signature[:4])
 
-    for num in range(n):
-        signature.append(fourth)
-        result.append(signature[num] + fourth)
-        fourth += signature[num]
-    print(result)
+    print(x_list)
 
 
-tribonacci([1, 1, 1], 10)
+high('man i need a taxi up to ubud')
