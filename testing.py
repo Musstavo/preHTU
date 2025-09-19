@@ -34,7 +34,7 @@ def order(sentence):
             word_index += 1
         else:
             letter_index += 1
-    print(new_empty)
+    print(" ".join(new_empty))
 
 
 order("4of Fo1r pe6ople g3ood th5e the2")
