@@ -14,7 +14,7 @@
 
 
 def order(sentence):
-    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     empty = []
     new_empty = []
     new_index = 0
@@ -26,12 +26,15 @@ def order(sentence):
     new_empty = empty
 
     letter_index = 0
-    for word in empty:
-        if word[letter_index] in numbers:
-            new_empty[word[letter_index] - 1] = word
+    word_index = 0
+    for num in range(len(sentence)):
+        if word_index < len(empty) - 1 and empty[word_index][letter_index] in numbers:
+            new_empty[int(empty[word_index][letter_index]) - 1] = empty[word_index]
             letter_index = 0
+            word_index += 1
         else:
             letter_index += 1
+
     print(new_empty)
 
 
