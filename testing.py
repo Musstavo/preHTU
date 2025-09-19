@@ -22,8 +22,11 @@ def order(sentence):
         if i == " ":
             empty.append(sentence[new_index:f].strip())
             new_index = f
-    empty.append(sentence[f - 1 :])
+    empty.append(sentence[new_index + 1 :])
     new_empty = empty.copy()
+
+    if len(empty) == 1:
+        return sentence
 
     letter_index = 0
     word_index = 0
@@ -34,7 +37,7 @@ def order(sentence):
             word_index += 1
         else:
             letter_index += 1
-    print(" ".join(new_empty))
+    return " ".join(new_empty)
 
 
-order("4of Fo1r pe6ople g3ood th5e the2")
+order("is2 Thi1s T4est 3a")
