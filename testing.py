@@ -14,15 +14,25 @@
 
 
 def order(sentence):
-    empty = sentence.split()
-    index = 0
     numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    sentence = sentence.split()
-    for num in range(len(str(sentence))):
-        if str(num) in sentence[index]:
-            empty[num-1] = sentence[index]
-            index += 1
-    print(empty)
+    empty = []
+    new_empty = []
+    new_index = 0
+    for f, i in enumerate(sentence):
+        if i == " ":
+            empty.append(sentence[new_index:f])
+            new_index = f
+    empty.append(sentence[f - 1 :])
+    new_empty = empty
+
+    letter_index = 0
+    for word in empty:
+        if word[letter_index] in numbers:
+            new_empty[word[letter_index] - 1] = word
+            letter_index = 0
+        else:
+            letter_index += 1
+    print(new_empty)
 
 
 order("is2 Thi1s T4est 3a")
