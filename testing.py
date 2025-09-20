@@ -16,24 +16,35 @@ def maxArena(height):
     for x, y in enumerate(height, start=1):
         couple = [x, y]
         accumilater.append(couple)
-    print(accumilater)
+
+    if len(height) < 3 and (height[0] == 0 or height[1] == 0):
+        print(0)
+
+    # (distance) * min(height[first], height[second])
 
     first_index = 0
     second_index = 1
-    # while len(areas) != pow(len(accumilater), 2):
-    for c in range(pow(len(accumilater), 2)):
+    while first_index < len(height) - 1:
         if accumilater[first_index][1] > accumilater[second_index][1]:
-            print(
+            areas.append(
                 abs(accumilater[first_index][0] - accumilater[second_index][0])
-                * (accumilater[first_index][1] - accumilater[second_index][1])
+                * (accumilater[second_index][1])
             )
         else:
-            print(
+            areas.append(
                 abs(accumilater[first_index][0] - accumilater[second_index][0])
                 * (accumilater[first_index][1])
             )
-    first_index += 1
-    second_index += 1
+        second_index += 1
+        if second_index == len(height):
+            first_index += 1
+            second_index = 1
+        if len(areas) == 2:
+            if areas[0] > areas[1]:
+                areas.pop(1)
+            else:
+                areas.pop(0)
+    print(areas[0])
 
 
-maxArena([1, 8, 6, 2, 5, 4, 8, 3, 7])
+maxArena([8, 7, 2, 1])
