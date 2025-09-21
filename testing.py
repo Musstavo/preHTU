@@ -1,50 +1,47 @@
-# You are given an integer array height of length n.
-#  There are n vertical lines drawn
-# such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+# You have a long flowerbed in which some of the plots are planted,
+# and some are not. However, flowers cannot be planted in adjacent plots.
 
-# Find two lines that together with the x-axis form a container,
-#  such that the container contains the most water.
-
-# Return the maximum amount of water a container can store.
-
-# Notice that you may not slant the container.
+# Given an integer array flowerbed containing 0's and 1's,
+# where 0 means empty and 1 means not empty, and an integer n,
+# return true if n new flowers can be planted in the flowerbed without
+# violating the no-adjacent-flowers rule and false otherwise.
 
 
-def maxArena(height):
-    accumilater = []
-    areas = []
-    for x, y in enumerate(height, start=1):
-        couple = [x, y]
-        accumilater.append(couple)
+# Example 1:
+# Input: flowerbed = [1,0,0,0,1], n = 1
+# Output: true
 
-    if len(height) < 3 and (height[0] == 0 or height[1] == 0):
-        print(0)
-
-    # (distance) * min(height[first], height[second])
-
-    first_index = 0
-    second_index = 1
-    while first_index < len(height) - 1:
-        if accumilater[first_index][1] > accumilater[second_index][1]:
-            areas.append(
-                abs(accumilater[first_index][0] - accumilater[second_index][0])
-                * (accumilater[second_index][1])
-            )
-        else:
-            areas.append(
-                abs(accumilater[first_index][0] - accumilater[second_index][0])
-                * (accumilater[first_index][1])
-            )
-        second_index += 1
-        if second_index == len(height):
-            first_index += 1
-            second_index = 1
-        if len(areas) == 2:
-            if areas[0] > areas[1]:
-                areas.pop(1)
-            else:
-                areas.pop(0)
-    print(areas[0])
+# Example 2:
+# Input: flowerbed = [1,0,0,0,1], n = 2
+# Output: false
 
 
-maxArena([8, 7, 2, 1])
+def canPlaceFlowers(flowerbed, n):
+    result = 0
+    if len(flowerbed) == 1 and flowerbed[0] == 0:
+        result += 1
+    if len(flowerbed) > 1:
+        if flowerbed[0] == 0 and flowerbed[1] == 0:
+            flowerbed[0] = -1
+            result += 1
+        if flowerbed[-1] == 0 and flowerbed[-2] == 0 and len(flowerbed) != 2:
+            flowerbed[-1] = 1
+            result += 1
+
+    for i in range(len(flowerbed)):
+        if (
+            i < len(flowerbed) - 2
+            and flowerbed[i] == flowerbed[i + 1]
+            and flowerbed[i + 1] == flowerbed[i + 2]
+        ):
+            flowerbed[i + 1] = 1
+            result += 1
+    if n <= result:
+        print(True)
+    return False
+
+
+canPlaceFlowers([0, 0, 0, 0], 3)  # should be false
+canPlaceFlowers([1, 0, 0, 0, 1, 0, 0], 2)
+canPlaceFlowers([0, 0, 0, 0, 1], 2)
+canPlaceFlowers([0, 0, 1, 0, 0], 1)
