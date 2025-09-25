@@ -1,47 +1,53 @@
-# You have a long flowerbed in which some of the plots are planted,
-# and some are not. However, flowers cannot be planted in adjacent plots.
+def hardestWorker(n, logs):  # logs = [[id, leaveetime], [id2,leavetime2]]
+    all_times = []
+    similar = []
+    i = 0
+    j = 0
+    k = 0
+    test = 0
+    while len(all_times) != len(logs):
+        if i == logs[j][1]:
+            all_times.append(i - k)
+            k = i
+            j += 1
+            i = 0
+        i += 1
 
-# Given an integer array flowerbed containing 0's and 1's,
-# where 0 means empty and 1 means not empty, and an integer n,
-# return true if n new flowers can be planted in the flowerbed without
-# violating the no-adjacent-flowers rule and false otherwise.
+    while all_times[0] != all_times[-1]:
+        if (all_times[1] - all_times[0]) > 0:
+            all_times.remove(all_times[0])
+        else:
+            all_times.remove(all_times[1])
 
-
-# Example 1:
-# Input: flowerbed = [1,0,0,0,1], n = 1
-# Output: true
-
-# Example 2:
-# Input: flowerbed = [1,0,0,0,1], n = 2
-# Output: false
-
-
-def canPlaceFlowers(flowerbed, n):
-    result = 0
-    if len(flowerbed) == 1 and flowerbed[0] == 0:
-        result += 1
-    if len(flowerbed) > 1:
-        if flowerbed[0] == 0 and flowerbed[1] == 0:
-            flowerbed[0] = -1
-            result += 1
-        if flowerbed[-1] == 0 and flowerbed[-2] == 0 and len(flowerbed) != 2:
-            flowerbed[-1] = 1
-            result += 1
-
-    for i in range(len(flowerbed)):
-        if (
-            i < len(flowerbed) - 2
-            and flowerbed[i] == flowerbed[i + 1]
-            and flowerbed[i + 1] == flowerbed[i + 2]
-        ):
-            flowerbed[i + 1] = 1
-            result += 1
-    if n <= result:
-        print(True)
-    return False
+    if len(all_times) == 1:
+        longest_index = all_times.index(max(all_times))
+        print(logs[longest_index][0])
+    else:
+        while len(similar) != len(all_times) and test < len(logs) - 1:
+            if logs[0][1] == max(all_times):
+                similar.append(logs[0][0])
+            if logs[test + 1][1] - logs[test][1] == max(all_times):
+                similar.append(logs[test + 1][0])
+                break
+            test += 1
+    print(min(similar))
+    print(all_times)
 
 
-canPlaceFlowers([0, 0, 0, 0], 3)  # should be false
-canPlaceFlowers([1, 0, 0, 0, 1, 0, 0], 2)
-canPlaceFlowers([0, 0, 0, 0, 1], 2)
-canPlaceFlowers([0, 0, 1, 0, 0], 1)
+hardestWorker(
+    453,
+    [
+        [217, 2],
+        [86, 4],
+        [329, 5],
+        [247, 6],
+        [45, 7],
+        [249, 8],
+        [396, 9],
+        [163, 12],
+        [433, 14],
+        [130, 15],
+        [364, 16],
+        [51, 19],
+    ],
+)
